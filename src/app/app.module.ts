@@ -10,6 +10,7 @@ import { HeroesComponent } from './components/heroes/heroes.component';
 
   // rutas
 import {APP_ROUTING} from './app.routes';
+import {HeroesService} from './servicios/heroes.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {APP_ROUTING} from './app.routes';
     BrowserModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [HeroesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
