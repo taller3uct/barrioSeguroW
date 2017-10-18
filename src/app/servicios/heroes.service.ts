@@ -71,6 +71,11 @@ export class HeroesService {
           getHeroes(): Heroe[]{
             return this.heroes;
         }
+        // retornamos la lista de heroes en idx
+        getHeroe(idx: string) {
+            return this.heroes[idx];
+
+        }
 }
 
 // tslint:disable-next-line:one-line
