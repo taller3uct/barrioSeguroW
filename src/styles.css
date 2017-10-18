@@ -39,3 +39,7 @@ body{
   .fadeIn {
     animation-name: fadeIn;
   }
+
+ .agm-map {
+    height: 300px;
+  }

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -14,6 +15,12 @@ import {HeroesService} from './servicios/heroes.service';
 import { HeroeComponent } from './components/heroe/heroe.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 
+// firebase
+import { AngularFireModule } from 'angularfire2';
+// CONFIGURACION FIREBASE
+import { firebaseConfig } from '../config/firebase.config';
+import { MapaComponent } from './components/mapa/mapa.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -23,11 +30,14 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     AboutComponent,
     HeroesComponent,
     HeroeComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    MapaComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
+    AngularFireModule.initializeApp(firebaseConfig.firebase),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBma13x3APDDc42KgCzM5NZOozZpdJfgNA'})
   ],
   providers: [HeroesService],
   bootstrap: [AppComponent]
