@@ -43,3 +43,7 @@ body{
  .agm-map {
     height: 300px;
   }
+
+  .card-columns { 
+      column-count: 4;
+    }
