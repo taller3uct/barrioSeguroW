@@ -7,6 +7,8 @@ import { AboutComponent } from './components/about/about.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { HeroeComponent } from './components/heroe/heroe.component';
 
+import {BuscadorComponent} from './components/buscador/buscador.component';
+
 
 
 const APP_ROUTES: Routes = [
@@ -14,7 +16,8 @@ const APP_ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'heroes', component: HeroesComponent },
   // id es el inicio del arreglo
-  { path: 'heroe/:id', component: HeroeComponent }
+  { path: 'heroe/:id', component: HeroeComponent },
+  { path: 'buscar/:termino', component: BuscadorComponent }
 ];
 
 

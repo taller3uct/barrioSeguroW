@@ -76,6 +76,23 @@ export class HeroesService {
             return this.heroes[idx];
 
         }
+        buscarHeroes (termino: string): Heroe[] {
+            // tslint:disable-next-line:prefer-const
+            let heroesArr: Heroe[] = [];
+            termino = termino.toLocaleLowerCase();
+
+            // tslint:disable-next-line:prefer-const
+            for ( let heroe of this.heroes){
+
+                // tslint:disable-next-line:prefer-const
+                let nombre = heroe.nombre.toLowerCase();
+                if (nombre.indexOf(termino) >= 0) {
+                    heroesArr.push(heroe);
+                }
+            }
+            return heroesArr;
+
+        }
 }
 
 // tslint:disable-next-line:one-line

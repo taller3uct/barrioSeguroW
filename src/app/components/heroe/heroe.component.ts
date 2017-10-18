@@ -7,7 +7,7 @@ import { HeroesService} from '../../servicios/heroes.service';
 })
 export class HeroeComponent {
 
-  heroe: any = {};
+  heroe: any[] = [];
 
   constructor( private activatedRoute: ActivatedRoute,
                private _heroesService: HeroesService ) {
