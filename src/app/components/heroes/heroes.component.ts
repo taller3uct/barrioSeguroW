@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 
 import { HeroesService, Heroe } from '../../servicios/heroes.service';
+// importar la ruta
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -12,16 +15,21 @@ export class HeroesComponent implements OnInit {
 
     heroes: Heroe[]= [];
 
-  constructor( private _heroesService: HeroesService) {
-    console.log('constructor');
+  constructor( private _heroesService: HeroesService,
+               private router: Router) {
+  //  console.log('constructor');
 
   }
 
   ngOnInit() {
 
-    this.heroes = this._heroesService.getHeroes();
+     this.heroes = this._heroesService.getHeroes();
 
-    console.log(this.heroes);
+    // console.log(this.heroes);
   }
 
+    verHeroe(idx: number) {
+      // cargo la ruta de navegacion de los heroes con idx que es el ide del arreglo
+      this.router.navigate(['/heroe', idx]);
+    }
 }
