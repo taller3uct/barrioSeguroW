@@ -5,11 +5,11 @@ export class HeroesService {
 
     private heroes: Heroe[]= [
             {
-              nombre: 'Aquaman reportando.',
+              nombre: 'Felipe Hernández.',
               // tslint:disable-next-line:max-line-length
               bio: 'Incendio en la avenida recabarren.',
-              img: 'assets/img/aquaman.png',
-              aparicion: '1941-11-01',
+              img: 'assets/img/user.png',
+              aparicion: '2017-10-27',
               casa: 'DC'
             },
             {
