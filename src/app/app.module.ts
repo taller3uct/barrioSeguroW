@@ -15,13 +15,14 @@ import {HeroesService} from './servicios/heroes.service';
 import { HeroeComponent } from './components/heroe/heroe.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 
-// firebase
-import { AngularFireModule } from 'angularfire2';
-// CONFIGURACION FIREBASE
-import { firebaseConfig } from '../config/firebase.config';
+
 import { MapaComponent } from './components/mapa/mapa.component';
 import { AgmCoreModule } from '@agm/core';
-
+// Firebase
+import { firebaseConfig } from '../config/firebase.config';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,10 +37,14 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     APP_ROUTING,
-    AngularFireModule.initializeApp(firebaseConfig.firebase),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBma13x3APDDc42KgCzM5NZOozZpdJfgNA'})
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBV2Y9ttsqqvbPEsHpizSelrYW-d9-bhVE'
+    })
   ],
-  providers: [HeroesService],
+  providers: [HeroesService, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

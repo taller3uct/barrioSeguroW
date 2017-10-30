@@ -5,6 +5,8 @@ import { HeroesService, Heroe } from '../../servicios/heroes.service';
 // importar la ruta
 
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-heroes',
@@ -14,9 +16,13 @@ import { Router } from '@angular/router';
 export class HeroesComponent implements OnInit {
 
     heroes: Heroe[]= [];
+    alarmas: Observable<any[]>;
 
   constructor( private _heroesService: HeroesService,
-               private router: Router) {
+               private router: Router,
+               db: AngularFireDatabase) {
+
+                this.alarmas = db.list('alertas').valueChanges();
   //  console.log('constructor');
 
   }
@@ -33,3 +39,4 @@ export class HeroesComponent implements OnInit {
       this.router.navigate(['/heroe', idx]);
     }
 }
+
