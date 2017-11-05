@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { HeroesService, Heroe } from '../../servicios/heroes.service';
 // importar la ruta
+import { map } from 'rxjs/operator/map';
 
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 
 @Component({
   selector: 'app-heroes',
@@ -14,18 +15,38 @@ import { AngularFireDatabase } from 'angularfire2/database';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-
-    heroes: Heroe[]= [];
+    db: AngularFireDatabase;
+    lista: {}[];
+    heroes: {}[];
     alarmas: Observable<any[]>;
-
+    result: string;
+    prueba: any= {} ;
+    listado: any= {}[''];
   constructor( private _heroesService: HeroesService,
                private router: Router,
                db: AngularFireDatabase) {
 
-                this.alarmas = db.list('alertas').valueChanges();
+                  this.prueba = db.list('alertas').valueChanges().map(items => {
+                                                                      this.lista = items;
+                                                                      console.log('emergencia', this.lista);
+                                                                                    });
+                  console.log(this.lista , 'aca no me toma');
+               // console.log(this.prueba , 'objeto');
+  /*              this.alarmas.subscribe(items => {
+                  // items is an array
+                  items.forEach(item => {
+                      console.log('Emergencia:', item);
+                      if (item.tipo === 'Policial') {
+                        console.log('poli', item.tipo);
+                      }
+
+                  });
+              }); */
+                // tslint:disable-next-line:prefer-const
   //  console.log('constructor');
 
   }
+
 
   ngOnInit() {
 
@@ -38,5 +59,54 @@ export class HeroesComponent implements OnInit {
       // cargo la ruta de navegacion de los heroes con idx que es el ide del arreglo
       this.router.navigate(['/heroe', idx]);
     }
+    mostrar_fecha(num: any) {
+      // tslint:disable-next-line:prefer-const
+      let Nfecha = new Date(num);
+      let dia = '';
+      let mes = '';
+
+      if (Nfecha.getDay() === 1) {
+        dia = 'Lunes ';
+      } else if (Nfecha.getDay() === 2) {
+        dia = 'Martes ';
+      } else if (Nfecha.getDay() === 3) {
+        dia = 'Miercoles ';
+      } else if (Nfecha.getDay() === 4) {
+        dia = 'Jueves ';
+      } else if (Nfecha.getDay() === 5) {
+        dia = 'Viernes ';
+      } else if (Nfecha.getDay() === 6) {
+        dia = 'Sabado ';
+      } else if (Nfecha.getDay() === 7) {
+        dia = 'Domingo ';
+      }
+      if (Nfecha.getMonth() === 0) {
+        mes = ' Enero, ';
+      } else if (Nfecha.getMonth() === 1) {
+        mes = ' Febrero, ';
+      } else if (Nfecha.getMonth() === 2) {
+        mes = ' Marzo, ';
+      } else if (Nfecha.getMonth() === 3) {
+        mes = ' Abril, ';
+      } else if (Nfecha.getMonth() === 4) {
+        mes = ' Mayo, ';
+      } else if (Nfecha.getMonth() === 5) {
+        mes = ' Junio, ';
+      } else if (Nfecha.getMonth() === 6) {
+        mes = ' Julio, ';
+      } else if (Nfecha.getMonth() === 7) {
+        mes = ' Agosto, ';
+      } else if (Nfecha.getMonth() === 8) {
+        mes = ' Septiembre, ';
+      } else if (Nfecha.getMonth() === 9) {
+        mes = ' Octubre, ';
+      } else if (Nfecha.getMonth() === 10) {
+        mes = ' Noviembre, ';
+      } else if (Nfecha.getMonth() === 11) {
+        mes = ' Diciembre, ';
+      }
+      return dia + Nfecha.getDate() + mes + Nfecha.getFullYear() + ', ' + Nfecha.toLocaleTimeString();
 }
 
+
+}

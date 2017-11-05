@@ -6,7 +6,8 @@
     <agm-map [latitude]="getLati()" [longitude]="getLong()" [zoom]="16" [scrollwheel]="false" [mapDraggable]="false">
         <agm-marker [latitude]="getLati()" [longitude]="getLong()">
             <agm-info-window>
-                <h5>Su latitud es {{getLati()}}</h5>
+                <h1>Usted se encuentra aqui</h1>
+                <p>Su latitud es {{getLati()}}</p>
                 <p>Su Longitud de trabajo es {{getLong()}}</p>
               </agm-info-window>
         </agm-marker>
@@ -14,16 +15,4 @@
   </div>
 </div>
 
-<div>
-    <h1 class="display-3">Barrio Seguro</h1>
-    <p class="lead">Es una aplicacion desarrollada para la seguridad cotidiana.</p>
-    <agm-map [latitude]="getLati()" [longitude]="getLong()" [zoom]="16" [scrollwheel]="false" [mapDraggable]="false">
-        <agm-marker [latitude]="getLati()" [longitude]="getLong()">
-            <agm-info-window>
-                <h5>Su latitud es {{getLati()}}</h5>
-                <p>Su Longitud de trabajo es {{getLong()}}</p>
-              </agm-info-window>
-        </agm-marker>
-      </agm-map>
-  </div>
 

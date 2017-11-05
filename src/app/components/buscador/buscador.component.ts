@@ -28,6 +28,7 @@ export class BuscadorComponent implements OnInit {
       db: AngularFireDatabase) {
 
         this.alarmas = db.list('alertas').valueChanges();
+        console.log(this.alarmas);
       }
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {

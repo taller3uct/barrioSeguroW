@@ -8,7 +8,6 @@ export class HeroesService {
               nombre: 'Felipe Hernández.',
               // tslint:disable-next-line:max-line-length
               bio: 'Incendio en la avenida recabarren.',
-              img: 'assets/img/user.png',
               aparicion: '2017-10-27',
               casa: 'DC'
             },
@@ -16,7 +15,6 @@ export class HeroesService {
               nombre: 'Batman reportando.',
               // tslint:disable-next-line:max-line-length
               bio: 'Choque en av caupolican con garibaldi.',
-              img: 'assets/img/batman.png',
               aparicion: '1939-05-01',
               casa: 'DC'
             },
@@ -24,7 +22,6 @@ export class HeroesService {
               nombre: 'Daredevil reportando.',
               // tslint:disable-next-line:max-line-length
               bio: 'Asalto a mano armada a las afuera de la UCT.',
-              img: 'assets/img/daredevil.png',
               aparicion: '1964-01-01',
               casa: 'Marvel'
             },
@@ -32,7 +29,6 @@ export class HeroesService {
               nombre: 'Hulk reportando.',
               // tslint:disable-next-line:max-line-length
               bio: 'Emergencia en la entrada de Cunco.',
-              img: 'assets/img/hulk.png',
               aparicion: '1962-05-01',
               casa: 'Marvel'
             },
@@ -40,7 +36,6 @@ export class HeroesService {
               nombre: 'Linterna Verde reportando.',
               // tslint:disable-next-line:max-line-length
               bio: 'Incendio en el mercado',
-              img: 'assets/img/linterna-verde.png',
               aparicion: '1940-06-01',
               casa: 'DC'
             },
@@ -48,7 +43,6 @@ export class HeroesService {
               nombre: 'Spider-Man reportando.',
               // tslint:disable-next-line:max-line-length
               bio: 'Intento de asalto en montt con aldunate.',
-              img: 'assets/img/spiderman.png',
               aparicion: '1962-08-01',
               casa: 'Marvel'
             },
@@ -56,7 +50,6 @@ export class HeroesService {
               nombre: 'Wolverine reportando.',
               // tslint:disable-next-line:max-line-length
               bio: 'Choque en Av alemania a las afueras de la universidad catolica.',
-              img: 'assets/img/wolverine.png',
               aparicion: '1974-11-01',
               casa: 'Marvel'
             }
@@ -100,7 +93,6 @@ export interface Heroe{
 
     nombre: string;
     bio: string;
-    img: string;
     aparicion: string;
     casa: string;
 }

@@ -23,6 +23,7 @@ import { firebaseConfig } from '../config/firebase.config';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { FiltroPipe } from './pipes/filtro.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
     HeroesComponent,
     HeroeComponent,
     BuscadorComponent,
-    MapaComponent
+    MapaComponent,
+    FiltroPipe
   ],
   imports: [
     BrowserModule,
