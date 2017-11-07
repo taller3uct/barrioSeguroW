@@ -1,37 +1,12 @@
 
 <h1>Registros <small> Generales</small></h1>
 <hr>
-<!--
-<div class="card-colums">
-    <!-- FOR DE LA LISTA DE GET -->
- <!--   <div class="card " *ngFor="let heroe of heroes; let i = index" style="width: 20rem;">
-      <!-- arreglo de imagenes heroe -->
- <!--       <img class="card-img-top img fluid" [src]="heroe.img" [alt]="heroe.nombre">
-        <div class="card-block">
-          <h4 class="card-title"> {{ heroe.nombre }} </h4>
-          <p class="card-text"> Emergencia </p>
-          <p class="card-text"> Descripcion</p>
-          <p class="card-text"> {{heroe.bio }} .</p>
-          <p class="card-text"><small class="text-muted">{{ heroe.aparicion }}</small></p>
 
-          <button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block" >
-            Ver más...
-          </button> 
-          <!-- Enrutamiento y carga del arreglo i de los heroes cargados en let = index  y indico
-          que heroe y que id tiene-->
-         <!--  <a [routerLink]="['/heroe',i]" class="btn btn-outline-primary">ver mas link </a> -->
-<!--        </div>
-      </div>
-</div> -->
-<div>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
 
-     <div class="form-group">
-        <label>Buscar descripcion:</label>
-        <input type="text" (keyup)= "filtroDec($event)">
-      </div>
 
 <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filtrar por tipo: {{tipoActivo.nombre}}
     </button>
 
@@ -43,7 +18,7 @@
 </div>
 
 <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Ver ultimas: {{ultimoActivo.nombre}}
     </button>
 
@@ -51,25 +26,28 @@
       <a *ngFor=" let item of ultimas" class="dropdown-item" (click)="filtroUltimo(item)"> {{item.nombre}}</a>
 
     </div>
-    
-</div>
 
 
 </div>
+
+<div class="form-inline my-2 my-lg-0">
+  <input type="text" class="form-control mr-sm-2" (keyup)= "filtroDec($event)" placeholder="Buscar descripcion:">
+</div>
+
+</nav>
 
 <div class="card-columns animated fadeIn">
     <div class="card" *ngFor="let alarma of (listado | async)?.reverse(); let i = index">
-        <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
-   <!--  <agm-map [latitude]="alarma.lat" [longitude]="alarma.lon" [zoom]="16" [scrollwheel]="false" [mapDraggable]="false">
+         <agm-map *ngIf="alarma.ver" [latitude]="alarma.lat" [longitude]="alarma.lon" [zoom]="16" [scrollwheel]="false" [mapDraggable]="false">
             <agm-marker [latitude]="alarma.lat" [longitude]="alarma.lon"></agm-marker>
-          </agm-map> -->
+          </agm-map>
         <div class="card-body">
           <h4 class="card-title">{{alarma.tipo}}</h4>
           <p class="card-text">{{alarma.descripcion}}</p>
           <p class="card-text">{{alarma.tiempo | date }}</p>
-          <button type="button" class="btn btn-outline-primary btn-block" >
+          <button type="button" class="btn btn-outline-primary btn-block" (click)="alarma.ver=!alarma.ver">
               Ver más...
-            </button> 
+          </button> 
         </div>
         
       </div>
