@@ -5,6 +5,7 @@ import { HeroesService, Heroe } from '../../servicios/heroes.service';
 // importar la ruta
 import { map } from 'rxjs/operator/map';
 
+
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
@@ -16,38 +17,27 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 })
 export class HeroesComponent implements OnInit {
     db: AngularFireDatabase;
-    lista: {}[];
     heroes: {}[];
     alarmas: Observable<any[]>;
     result: string;
-    prueba: any= {} ;
-    listado: any= {}[''];
+    listado: any;
+    Policia = 'Policia';
   constructor( private _heroesService: HeroesService,
                private router: Router,
                db: AngularFireDatabase) {
 
-                  this.prueba = db.list('alertas').valueChanges().map(items => {
-                                                                      this.lista = items;
-                                                                      console.log('emergencia', this.lista);
-                                                                                    });
-                  console.log(this.lista , 'aca no me toma');
-               // console.log(this.prueba , 'objeto');
-  /*              this.alarmas.subscribe(items => {
-                  // items is an array
-                  items.forEach(item => {
-                      console.log('Emergencia:', item);
-                      if (item.tipo === 'Policial') {
-                        console.log('poli', item.tipo);
-                      }
+                  this.alarmas = db.list('alertas').valueChanges();
 
-                  });
-              }); */
-                // tslint:disable-next-line:prefer-const
-  //  console.log('constructor');
+                  this.listado = this.alarmas.map( a => {
+                    // console.log(a); //MAPEO
+                    return a.filter(b => {
+                      console.log(b.tipo , 'tipoos');
+                       return b;
+                      // tslint:disable-next-line:max-line-length
+                      // return (b.tipo.toLowerCase().indexOf(this.Policia.toLowerCase()) > -1);
+                    }); });
 
   }
-
-
   ngOnInit() {
 
      this.heroes = this._heroesService.getHeroes();
