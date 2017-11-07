@@ -39,28 +39,37 @@ export class HeroesComponent implements OnInit {
     { nombre: 'Incendios', valor: 'Incendio' },
     { nombre: 'Ambulancias', valor: 'Ambulancia' }
   ];
-  tipoActivo = this.tipo[0];
 
+  getDesc= '';
+
+  tipoActivo = this.tipo[0];
+  usuarios: Array<any>;
   usuarioActivo = { correo: 'todos', valor: '' };
 
   constructor(private _heroesService: HeroesService,
     private router: Router,
     private db: AngularFireDatabase) {
-      this.getAlarmas();
+ 
   }
   ngOnInit() {
+
+    this.alarmas = this.db.list('alertas', ref => ref.orderByChild('tiempo')
+    .startAt(this.ultimos(24))).valueChanges();
+    this.getAlarmas();
+
   }
 
   getAlarmas() {
-    console.log(this.ultimos(this.ultimoActivo.valor));
-    
-    this.alarmas = this.db.list('alertas', ref => ref.orderByChild('tiempo')
-    .startAt(this.ultimos(this.ultimoActivo.valor))).valueChanges();
+
+
 
     this.listado = this.alarmas.map(a => {
       return a.filter(b => {
         // tslint:disable-next-line:max-line-length
-        return (b.tipo.toLowerCase().indexOf(this.tipoActivo.valor.toLowerCase()) > -1)
+        return (b.tipo.toLowerCase().indexOf(this.tipoActivo.valor.toLowerCase()) > -1) &&
+               (b.tiempo > this.ultimos(this.ultimoActivo.valor)) &&
+               (b.descripcion.toLowerCase().indexOf(this.getDesc.toLowerCase()) > -1)
+
           ;
         //          ;
       });
@@ -75,10 +84,12 @@ filtroUltimo(item) {
   this.ultimoActivo = item;
   this.getAlarmas();
 }
-filtroUsuario(item) {
-  this.usuarioActivo = item;
+filtroDec(event) {
+  this.getDesc = event.target.value;
   this.getAlarmas();
+  
 }
+
 
 
   verHeroe(idx: number) {

@@ -24,6 +24,12 @@
       </div>
 </div> -->
 <div>
+
+     <div class="form-group">
+        <label>Buscar descripcion:</label>
+        <input type="text" (keyup)= "filtroDec($event)">
+      </div>
+
 <div class="btn-group" role="group">
     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filtrar por tipo: {{tipoActivo.nombre}}
@@ -48,17 +54,6 @@
     
 </div>
 
-<div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Filtrar por usuario: {{usuarioActivo.correo}}
-    </button>
-
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <a *ngFor="let items of usuarios" class="dropdown-item" href="#">{{items}}</a>
-
-    </div>
-    
-</div>
 
 </div>
 
