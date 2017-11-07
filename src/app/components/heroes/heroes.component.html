@@ -23,12 +23,44 @@
 <!--        </div>
       </div>
 </div> -->
+<div>
+<div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filtrar por tipo: {{tipoActivo.nombre}}
+    </button>
 
-<form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" placeholder="Buscar"  #buscarTexto>
-    <button (click)="buscarHeroe(buscarTexto.value)"
-    class="btn btn-outline-primary my-2 my-sm-0" type="button">Buscar</button>
-  </form>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a *ngFor="let items of tipo" class="dropdown-item" (click)="filtroTipo(items)">{{items.nombre}}</a>
+
+    </div>
+    
+</div>
+
+<div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Ver ultimas: {{ultimoActivo.nombre}}
+    </button>
+
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a *ngFor=" let item of ultimas" class="dropdown-item" (click)="filtroUltimo(item)"> {{item.nombre}}</a>
+
+    </div>
+    
+</div>
+
+<div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filtrar por usuario: {{usuarioActivo.correo}}
+    </button>
+
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a *ngFor="let items of usuarios" class="dropdown-item" href="#">{{items}}</a>
+
+    </div>
+    
+</div>
+
+</div>
 
 <div class="card-columns animated fadeIn">
     <div class="card" *ngFor="let alarma of (listado | async)?.reverse(); let i = index">
@@ -39,10 +71,11 @@
         <div class="card-body">
           <h4 class="card-title">{{alarma.tipo}}</h4>
           <p class="card-text">{{alarma.descripcion}}</p>
-          <p class="card-text">{{ mostrar_fecha(alarma.tiempo) }}</p>
-          <button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block" >
+          <p class="card-text">{{alarma.tiempo | date }}</p>
+          <button type="button" class="btn btn-outline-primary btn-block" >
               Ver más...
             </button> 
         </div>
+        
       </div>
     </div>

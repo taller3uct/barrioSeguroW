@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HeroesService} from '../../servicios/heroes.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operator/map';
 
 // tslint:disable-next-line:class-name
 export interface xalarmas {
@@ -20,28 +21,54 @@ export interface xalarmas {
 // tslint:disable-next-line:one-line
 
 export class BuscadorComponent implements OnInit {
+    alarmas2: Observable<any[]>;
     db: AngularFireDatabase;
     heroes: {}[];
     alarmas: Observable<any[]>;
     result: string;
     listado: any;
-    Policia = 'Policia';
+    listado2: any;
+    listado3: any;
+
     termino: string;
     constructor( private activatedRoute: ActivatedRoute,
       private _heroesService: HeroesService,
                 db: AngularFireDatabase) {
-        this.alarmas = db.list('alertas').valueChanges();
+                this.alarmas = db.list('alertas').valueChanges();
+                this.alarmas2 = db.list('alertas').valueChanges();
 
                           this.listado = this.alarmas.map( a => {
                             // console.log(a); //MAPEO
                             return a.filter(b => {
-                              console.log(b.tipo , 'tipoos');
-                              console.log(this.mostrar_fecha(b.tiempo));
-                              // return b.tipo;
-                              // tslint:disable-next-line:max-line-length
                               return (b.tipo.toLowerCase().indexOf(this.termino.toLowerCase()) > -1) || (b.tipo.toLowerCase().indexOf(this.termino.toLowerCase()) > -1)
-                                      ;
+;
+                            //          ;
                             }); });
+
+                            this.listado2 = this.alarmas.map( a => {
+                              // console.log(a); //MAPEO
+                              return a.filter(b => {
+                                console.log(b.descripcion , 'tipoos');
+                                console.log(this.mostrar_fecha(b.tiempo));
+                                // return b.tipo;
+                                // tslint:disable-next-line:max-line-length
+                                return (b.descripcion.toLowerCase().indexOf(this.termino.toLowerCase()) > -1) || (b.descripcion.toLowerCase().indexOf(this.termino.toLowerCase()) > -1)
+                                        ;
+                              }); });
+
+                              this.listado3 = this.alarmas2.map( a => {
+                                // console.log(a); //MAPEO
+                                return a.filter(b => {
+                                  console.log(b.descripcion , 'tipoos');
+                                  console.log(this.mostrar_fecha(b.tiempo));
+                                  // return b.tipo;
+                                  // tslint:disable-next-line:max-line-length
+                                  return ((b.tiempo).toLowerCase().indexOf(this.termino.toLowerCase()) > -1) || ((b.tiempo).toLowerCase().indexOf(this.termino.toLowerCase()) > -1)
+                                          ;
+                                }); });
+
+
+
 
 
       }
@@ -104,4 +131,7 @@ export class BuscadorComponent implements OnInit {
       return dia + Nfecha.getDate() + mes + Nfecha.getFullYear() + ', ' + Nfecha.toLocaleTimeString();
 }
     // tslint:disable-next-line:one-line
+
+
+
 }

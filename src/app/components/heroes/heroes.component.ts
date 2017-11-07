@@ -10,95 +10,86 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 
+import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-    busqueda: string;
-    db: AngularFireDatabase;
-    heroes: {}[];
-    alarmas: Observable<any[]>;
-    result: string;
-    listado: any;
-    Policia = 'Policia';
-  constructor( private _heroesService: HeroesService,
-               private router: Router,
-               db: AngularFireDatabase) {
+  busqueda: string;
+  heroes: {}[];
+  alarmas: Observable<any[]>;
+  result: string;
+  listado: any;
+  Policia = 'Policia';
 
-                  this.alarmas = db.list('/alertas', ref => ref.orderByChild('tiempo').startAt(this.ultimos())).valueChanges();
+  ultimas = [
+    { nombre: '24 horas', valor: 24 },
+    { nombre: '12 horas', valor: 12 },
+    { nombre: '6 horas', valor: 6 },
+    { nombre: '3 horas', valor: 3 },
+    { nombre: '1 hora', valor: 1 }
+  ];
+  ultimoActivo = this.ultimas[0];
+  tipo = [
+    { nombre: 'Todas', valor: '' },
+    { nombre: 'Policiales', valor: 'Policial' },
+    { nombre: 'Incendios', valor: 'Incendio' },
+    { nombre: 'Ambulancias', valor: 'Ambulancia' }
+  ];
+  tipoActivo = this.tipo[0];
 
-                  this.listado = this.alarmas.map( a => {
-                    // console.log(a); //MAPEO
-                    return a.filter(b => {
-                      console.log(b.tipo , 'tipoos');
-                      return b;
-                      // tslint:disable-next-line:max-line-length
-                      // return (b.tipo.toLowerCase().indexOf(this.Policia.toLowerCase()) > -1);
-                    }); });
+  usuarioActivo = { correo: 'todos', valor: '' };
 
+  constructor(private _heroesService: HeroesService,
+    private router: Router,
+    private db: AngularFireDatabase) {
+      this.getAlarmas();
   }
   ngOnInit() {
   }
 
-    verHeroe(idx: number) {
-      // cargo la ruta de navegacion de los heroes con idx que es el ide del arreglo
-      this.router.navigate(['/heroe', idx]);
-    }
-    mostrar_fecha(num: any) {
-      // tslint:disable-next-line:prefer-const
-      let Nfecha = new Date(num);
-      let dia = '';
-      let mes = '';
+  getAlarmas() {
+    console.log(this.ultimos(this.ultimoActivo.valor));
+    
+    this.alarmas = this.db.list('alertas', ref => ref.orderByChild('tiempo')
+    .startAt(this.ultimos(this.ultimoActivo.valor))).valueChanges();
 
-      if (Nfecha.getDay() === 1) {
-        dia = 'Lunes ';
-      } else if (Nfecha.getDay() === 2) {
-        dia = 'Martes ';
-      } else if (Nfecha.getDay() === 3) {
-        dia = 'Miercoles ';
-      } else if (Nfecha.getDay() === 4) {
-        dia = 'Jueves ';
-      } else if (Nfecha.getDay() === 5) {
-        dia = 'Viernes ';
-      } else if (Nfecha.getDay() === 6) {
-        dia = 'Sabado ';
-      } else if (Nfecha.getDay() === 7) {
-        dia = 'Domingo ';
-      }
-      if (Nfecha.getMonth() === 0) {
-        mes = ' Enero, ';
-      } else if (Nfecha.getMonth() === 1) {
-        mes = ' Febrero, ';
-      } else if (Nfecha.getMonth() === 2) {
-        mes = ' Marzo, ';
-      } else if (Nfecha.getMonth() === 3) {
-        mes = ' Abril, ';
-      } else if (Nfecha.getMonth() === 4) {
-        mes = ' Mayo, ';
-      } else if (Nfecha.getMonth() === 5) {
-        mes = ' Junio, ';
-      } else if (Nfecha.getMonth() === 6) {
-        mes = ' Julio, ';
-      } else if (Nfecha.getMonth() === 7) {
-        mes = ' Agosto, ';
-      } else if (Nfecha.getMonth() === 8) {
-        mes = ' Septiembre, ';
-      } else if (Nfecha.getMonth() === 9) {
-        mes = ' Octubre, ';
-      } else if (Nfecha.getMonth() === 10) {
-        mes = ' Noviembre, ';
-      } else if (Nfecha.getMonth() === 11) {
-        mes = ' Diciembre, ';
-      }
-      return dia + Nfecha.getDate() + mes + Nfecha.getFullYear() + ', ' + Nfecha.toLocaleTimeString();
+    this.listado = this.alarmas.map(a => {
+      return a.filter(b => {
+        // tslint:disable-next-line:max-line-length
+        return (b.tipo.toLowerCase().indexOf(this.tipoActivo.valor.toLowerCase()) > -1)
+          ;
+        //          ;
+      });
+    });
+  }
+filtroTipo(item) {
+  this.tipoActivo = item;
+  this.getAlarmas();
 }
 
-ultimos() {
-  let hoy = new Date();
-  hoy.setDate(hoy.getDate() - 1);
-  return hoy.getTime();
+filtroUltimo(item) {
+  this.ultimoActivo = item;
+  this.getAlarmas();
 }
+filtroUsuario(item) {
+  this.usuarioActivo = item;
+  this.getAlarmas();
+}
+
+
+  verHeroe(idx: number) {
+    // cargo la ruta de navegacion de los heroes con idx que es el ide del arreglo
+    this.router.navigate(['/heroe', idx]);
+  }
+
+  ultimos(horas) {
+    const hoy = new Date();
+    hoy.setHours(hoy.getHours() - horas);
+    return hoy.getTime();
+  }
 
 }
