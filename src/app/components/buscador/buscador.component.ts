@@ -29,21 +29,24 @@ export class BuscadorComponent implements OnInit {
     termino: string;
     constructor( private activatedRoute: ActivatedRoute,
       private _heroesService: HeroesService,
-      db: AngularFireDatabase) {
-
+                db: AngularFireDatabase) {
         this.alarmas = db.list('alertas').valueChanges();
 
                           this.listado = this.alarmas.map( a => {
                             // console.log(a); //MAPEO
                             return a.filter(b => {
                               console.log(b.tipo , 'tipoos');
+                              console.log(this.mostrar_fecha(b.tiempo));
                               // return b.tipo;
                               // tslint:disable-next-line:max-line-length
-                              return (b.tipo.toLowerCase().indexOf(this.termino.toLowerCase()) > -1);
+                              return (b.tipo.toLowerCase().indexOf(this.termino.toLowerCase()) > -1) || (b.tipo.toLowerCase().indexOf(this.termino.toLowerCase()) > -1)
+                                      ;
                             }); });
+
 
       }
   ngOnInit() {
+
     this.activatedRoute.params.subscribe( params => {
     this.termino = params['termino'];
     this.heroes = this._heroesService.buscarHeroes( params['termino']);

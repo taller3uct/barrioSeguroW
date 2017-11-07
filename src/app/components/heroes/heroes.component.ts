@@ -16,6 +16,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
+    busqueda: string;
     db: AngularFireDatabase;
     heroes: {}[];
     alarmas: Observable<any[]>;
@@ -26,23 +27,19 @@ export class HeroesComponent implements OnInit {
                private router: Router,
                db: AngularFireDatabase) {
 
-                  this.alarmas = db.list('alertas').valueChanges();
+                  this.alarmas = db.list('/alertas', ref => ref.orderByChild('tiempo').startAt(this.ultimos())).valueChanges();
 
                   this.listado = this.alarmas.map( a => {
                     // console.log(a); //MAPEO
                     return a.filter(b => {
                       console.log(b.tipo , 'tipoos');
-                       return b;
+                      return b;
                       // tslint:disable-next-line:max-line-length
                       // return (b.tipo.toLowerCase().indexOf(this.Policia.toLowerCase()) > -1);
                     }); });
 
   }
   ngOnInit() {
-
-     this.heroes = this._heroesService.getHeroes();
-
-    // console.log(this.heroes);
   }
 
     verHeroe(idx: number) {
@@ -98,5 +95,10 @@ export class HeroesComponent implements OnInit {
       return dia + Nfecha.getDate() + mes + Nfecha.getFullYear() + ', ' + Nfecha.toLocaleTimeString();
 }
 
+ultimos() {
+  let hoy = new Date();
+  hoy.setDate(hoy.getDate() - 1);
+  return hoy.getTime();
+}
 
 }

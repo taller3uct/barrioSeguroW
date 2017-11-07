@@ -26,23 +26,28 @@
         <a class="nav-link" [routerLink]="['about']">Barrios</a>
       </li>
     </ul>
-
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Buscar" (keyup.enter)="onEnter(buscarHeroe(buscarTexto.value))" #buscarTexto>
-      <button (click)="buscarHeroe(buscarTexto.value)"
-      class="btn btn-outline-primary my-2 my-sm-0" type="button">Buscar</button>
-    </form>
     
-      Search: <input ng-model="searchText">
-      <table id="searchTextResults">
-        <tr><th>Name</th><th>Phone</th></tr>
-       <!-- <tr ng-repeat="friend in friends | filter:searchText"> -->
-          <td>nombre</td>
-          <td>numero</td>
-      </table>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Buscar"  #buscarTexto>
+      <button (click)="buscarHeroe(buscarTexto.value)"
+      class="btn btn-outline-primary my-2 my-sm-0" type="button">
+      Buscar</button>
 
+      <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary my-2 my-sm-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </button>
 
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="#">24 Horas</a>
+            <a class="dropdown-item" href="#">Tipo</a>
+            <a class="dropdown-item" href="#">Usuario</a>
+            <a class="dropdown-item" href="#">Fecha</a>
 
+          </div>
+      </div>
+
+    </form>
 
   </div>
 </nav>

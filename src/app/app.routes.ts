@@ -18,6 +18,7 @@ const APP_ROUTES: Routes = [
   // id es el inicio del arreglo
   { path: 'heroe/:id', component: HeroeComponent },
   { path: 'buscar/:termino', component: BuscadorComponent },
+  { path: 'busqueda/:busqueda', component: HeroesComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 
