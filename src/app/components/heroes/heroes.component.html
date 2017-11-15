@@ -38,8 +38,17 @@
 
 <div class="card-columns animated fadeIn">
     <div class="card" *ngFor="let alarma of (listado | async)?.reverse(); let i = index">
-         <agm-map *ngIf="alarma.ver" [latitude]="alarma.lat" [longitude]="alarma.lon" [zoom]="15" [scrollwheel]="false" [mapDraggable]="false">
-            <agm-marker [latitude]="alarma.lat" [longitude]="alarma.lon"></agm-marker>
+         <agm-map *ngIf="alarma.ver" [latitude]="alarma.lat" [longitude]="alarma.lon" [zoom]="15" [scrollwheel]="false" [mapDraggable]="true">
+            <agm-marker [latitude]="alarma.lat" [longitude]="alarma.lon">
+
+              <agm-info-window >
+                <h6>{{alarma.tipo}}</h6>
+                <p>{{alarma.descripcion}}</p>
+                <P>Lat:{{alarma.lat}}, Lon:{{alarma.lon}}</P>
+              </agm-info-window>
+
+            </agm-marker>
+
           </agm-map>
         <div class="card-body">
           <h4 class="card-title">{{alarma.tipo}}</h4>
