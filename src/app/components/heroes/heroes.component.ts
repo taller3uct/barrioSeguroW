@@ -18,6 +18,7 @@ export class HeroesComponent implements OnInit {
 
 
   ultimas = [
+    { nombre: '1 Año', valor: 8760},
     { nombre: '24 horas', valor: 24 },
     { nombre: '12 horas', valor: 12 },
     { nombre: '6 horas', valor: 6 },
@@ -45,14 +46,12 @@ export class HeroesComponent implements OnInit {
   ngOnInit() {
 
     this.alarmas = this.db.list('alertas', ref => ref.orderByChild('tiempo')
-    .startAt(this.ultimos(24))).valueChanges();
+    .startAt(this.ultimos(8760))).valueChanges();
     this.getAlarmas();
 
   }
 
   getAlarmas() {
-
-
 
     this.listado = this.alarmas.map(a => {
       return a.filter(b => {

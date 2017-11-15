@@ -6,7 +6,7 @@
 
 
 <div class="btn-group " role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-danger " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filtrar por tipo: {{tipoActivo.nombre}}
     </button>
 
@@ -18,7 +18,7 @@
 </div>
 
 <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-outline-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn btn-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Ver ultimas: {{ultimoActivo.nombre}}
     </button>
 
@@ -43,9 +43,10 @@
           </agm-map>
         <div class="card-body">
           <h4 class="card-title">{{alarma.tipo}}</h4>
-          <p class="card-text">{{alarma.descripcion}}</p>
-          <p class="card-text">{{alarma.tiempo | date }}</p>
-          <button type="button" class="btn btn-outline-primary btn-block" (click)="alarma.ver=!alarma.ver">
+          <p class="card-text">Detalles: {{alarma.descripcion}}</p>
+          <p class="card-text">Fecha: {{alarma.tiempo | date }}</p>
+          <p class="card-text">Junta de vecinos: {{alarma.junta}}</p>
+          <button type="button" class="btn btn-outline-danger btn-block" (click)="alarma.ver=!alarma.ver">
               Ver ubicación.
           </button> 
         </div>
