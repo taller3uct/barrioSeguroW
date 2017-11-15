@@ -31,6 +31,7 @@
 </div>
 
 <div class="form-inline my-2 my-lg-0">
+  <!-- Al escribir obtiene la tecla oprimida y devuelve la letra escrita -->
   <input type="text" class="form-control mr-sm-2" (keyup)= "filtroDec($event)" placeholder="Buscar descripcion:">
 </div>
 
@@ -43,7 +44,6 @@
 
               <agm-info-window >
                 <h6>{{alarma.tipo}}</h6>
-                <p>{{alarma.descripcion}}</p>
                 <P>Lat:{{alarma.lat}}, Lon:{{alarma.lon}}</P>
               </agm-info-window>
 

@@ -36,8 +36,7 @@ export class HeroesComponent implements OnInit {
   getDesc= '';
 
   tipoActivo = this.tipo[0];
-  usuarios: Array<any>;
-  usuarioActivo = { correo: 'todos', valor: '' };
+
 
   constructor(
     private db: AngularFireDatabase) {
