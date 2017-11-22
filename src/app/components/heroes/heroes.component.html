@@ -38,7 +38,7 @@
 </nav>
 
 <div class="card-columns animated fadeIn">
-    <div class="card" *ngFor="let alarma of (listado | async)?.reverse(); let i = index">
+    <div class="card" *ngFor="let alarma of (listado | async); let i = index">
          <agm-map *ngIf="alarma.ver" [latitude]="alarma.lat" [longitude]="alarma.lon" [zoom]="15" [scrollwheel]="false" [mapDraggable]="true">
             <agm-marker [latitude]="alarma.lat" [longitude]="alarma.lon">
 
@@ -54,7 +54,7 @@
           <h4 class="card-title">{{alarma.tipo}}</h4>
           <p class="card-text">Detalles: {{alarma.descripcion}}</p>
           <p class="card-text">Fecha: {{alarma.tiempo | date }}</p>
-          <p class="card-text">Junta de vecinos: {{alarma.junta}}</p>
+<!--          <p class="card-text">Junta de vecinos: {{alarma.junta.nombre}}</p> -->
           <button type="button" class="btn btn-outline-danger btn-block" (click)="alarma.ver=!alarma.ver">
               Ver ubicación.
           </button> 

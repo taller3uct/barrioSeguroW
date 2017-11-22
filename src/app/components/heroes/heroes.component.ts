@@ -47,13 +47,13 @@ export class HeroesComponent implements OnInit {
     this.alarmas = this.db.list('alertas', ref => ref.orderByChild('tiempo')
     .startAt(this.ultimos(8760))).valueChanges();
     this.getAlarmas();
-
+    //this.listado.reverse();
   }
 
   getAlarmas() {
 
     this.listado = this.alarmas.map(a => {
-      return a.filter(b => {
+      return a.reverse().filter(b => {
         b.ver = false;
         return (b.tipo.toLowerCase().indexOf(this.tipoActivo.valor.toLowerCase()) > -1) &&
                (b.tiempo > this.ultimos(this.ultimoActivo.valor)) &&
@@ -62,6 +62,7 @@ export class HeroesComponent implements OnInit {
           ;
       });
     });
+ //   this.listado.reverse();
   }
 filtroTipo(item) {
   this.tipoActivo = item;

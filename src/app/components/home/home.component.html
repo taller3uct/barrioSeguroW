@@ -1,6 +1,6 @@
 
-<div class="jumbotron jumbotron-fluid" animated fadeIn fast>
-  <div>
+<div class="jumbotron jumbotron-fluid over-flow" animated fadeIn fast>
+  <div class="over-flow">
     <h1 class="display-3">Barrio Seguro</h1>
     <hr>
     <p class="lead">Es una aplicacion desarrollada para la seguridad cotidiana.</p>
@@ -9,8 +9,8 @@
         <agm-marker [latitude]="getLati()" [longitude]="getLong()">
             <agm-info-window>
                 <h1>Usted se encuentra aqui</h1>
-                <p>Su latitud es {{getLati()}}</p>
-                <p>Su Longitud de trabajo es {{getLong()}}</p>
+                <p>Su Latitud es {{getLati()}}</p>
+                <p>Su Longitud es {{getLong()}}</p>
               </agm-info-window>
         </agm-marker>
       </agm-map>

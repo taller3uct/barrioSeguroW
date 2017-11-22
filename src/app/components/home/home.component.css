@@ -3,4 +3,9 @@
     height: 400px;
     width: 900px;
   }
+
+  .over-flow{
+    overflow: auto;
+
+  }
   
